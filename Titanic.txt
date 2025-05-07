@@ -1,0 +1,28 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 import pandas as pd\
+\
+def map_reduce_with_pandas(input_file):\
+    df = pd.read_csv(input_file)\
+\
+    deceased_males = df[(df['Survived'] == 0) & (df['Sex'] == 'male')]\
+\
+    average_age_deceased_males = deceased_males['Age'].mean()\
+\
+    deceased_females_by_class = df[(df['Survived'] == 0) & (df['Sex'] == 'female')]\
+\
+    count_deceased_females_by_class = deceased_females_by_class['Pclass'].value_counts()\
+\
+    return average_age_deceased_males, count_deceased_females_by_class\
+\
+# Example usage\
+input_file = r\'92titanic_dataset.csv'  # Ensure this is your correct file path\
+average_age, female_class_count = map_reduce_with_pandas(input_file)\
+print(f"Average age of males who died: \{average_age:.2f\}")\
+print("Number of deceased females in each class:")\
+print(female_class_count)}
