@@ -1,48 +1,40 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2821
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+def map_function(student_scores):
+    mapped_data = []
+    for student_id, score in student_scores:
+        mapped_data.append((student_id, score))
+    return mapped_data
 
-\f0\fs24 \cf0 def map_function(student_scores):\
-    mapped_data = []\
-    for student_id, score in student_scores:\
-        mapped_data.append((student_id, score))\
-    return mapped_data\
-\
-def reduce_function(mapped_data):\
-    grades = \{\}\
-    for student_id, score in mapped_data:\
-        if score > 80:\
-            grade = 'A'\
-        elif score > 60:\
-            grade = 'B'\
-        elif score > 40:\
-            grade = 'C'\
-        else:\
-            grade = 'D'\
-        grades[student_id] = grade\
-    return grades\
-\
-def map_reduce(student_scores):\
-    mapped_data = map_function(student_scores)\
-    \
-    return reduce_function(mapped_data)\
-\
-# Example student scores (student_id, score)\
-student_scores = [\
-    (1, 85),\
-    (2, 75),\
-    (3, 55),\
-    (4, 35),\
-    (5, 90)\
-]\
-\
-# Execute MapReduce to get grades\
-grades = map_reduce(student_scores)\
-\
-# Display results\
-for student_id, grade in grades.items():\
-    print(f"Student \{student_id\} has been assigned grade \{grade\}.")\
-}
+def reduce_function(mapped_data):
+    grades = {}
+    for student_id, score in mapped_data:
+        if score > 80:
+            grade = 'A'
+        elif score > 60:
+            grade = 'B'
+        elif score > 40:
+            grade = 'C'
+        else:
+            grade = 'D'
+        grades[student_id] = grade
+    return grades
+
+def map_reduce(student_scores):
+    mapped_data = map_function(student_scores)
+    
+    return reduce_function(mapped_data)
+
+# Example student scores (student_id, score)
+student_scores = [
+    (1, 85),
+    (2, 75),
+    (3, 55),
+    (4, 35),
+    (5, 90)
+]
+
+# Execute MapReduce to get grades
+grades = map_reduce(student_scores)
+
+# Display results
+for student_id, grade in grades.items():
+    print(f"Student {student_id} has been assigned grade {grade}.")
